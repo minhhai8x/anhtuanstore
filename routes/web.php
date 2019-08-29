@@ -26,3 +26,13 @@ Route::get('/news', function () {
 Route::get('/contact', function () {
     return view('layouts.contact');
 });
+
+Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);
+Route::post('admincp/login', ['as' => 'postLogin', 'uses' => 'Admin\AdminLoginController@postLogin']);
+Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginController@getLogout']);
+
+Route::group(['middleware' => 'CheckAdminLogin', 'prefix' => 'admincp', 'namespace' => 'Admin'], function() {
+    Route::get('/', function() {
+        return view('admin.home');
+    });
+});
