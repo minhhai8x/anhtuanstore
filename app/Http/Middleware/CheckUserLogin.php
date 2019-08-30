@@ -27,7 +27,7 @@ class CheckUserLogin
                 return redirect()->route('getUserLogin');
             }
         } else {
-            return redirect('/home');
+            return redirect('home');
         }
     }
 }

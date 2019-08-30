@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\Requests\LoginRequest;
-use Illuminate\Support\Facades\Validator;
 
 class UserLoginController extends Controller
 {
@@ -24,7 +23,7 @@ class UserLoginController extends Controller
      *
      * @param  LoginRequest $request
      *
-     * @return Response
+     * @return RedirectResponse
      */
     public function postUserLogin(LoginRequest $request)
     {
@@ -35,17 +34,21 @@ class UserLoginController extends Controller
             'status' => 1,
         ];
 
-        $validator = Validator::make(
-          $request->all(),
-          $request->rules(),
-          $request->messages()
-        );
-
         if (Auth::attempt($credentials)) {
             // Authentication passed
             return redirect('home');
         } else {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->with('status', 'Email or Password is incorrect.');
         }
+    }
+
+    /**
+     * action logout
+     * @return RedirectResponse
+     */
+    public function getUserLogout()
+    {
+        Auth::logout();
+        return redirect()->route('getUserLogin');
     }
 }

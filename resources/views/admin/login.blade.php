@@ -38,7 +38,7 @@
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            @if (count($errors) >0)
+            @if ($errors->any())
              <ul>
                  @foreach($errors->all() as $error)
                      <li class="text-danger"> {{ $error }}</li>
@@ -53,7 +53,7 @@
             @endif
 
             <form action="{{ route('getLogin') }}" method="post">
-                {{ csrf_field() }}
+                @csrf
                 <div class="form-group has-feedback">
                     <input type="email" class="form-control" placeholder="Email" name="txtEmail">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
