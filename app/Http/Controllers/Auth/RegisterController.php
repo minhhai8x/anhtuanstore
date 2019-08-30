@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
             'phone' => $data['phone'],
+            'level' => 2, // Levels: 1 is Admin, 2 is other
         ]);
     }
 }

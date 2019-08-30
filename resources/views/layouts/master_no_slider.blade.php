@@ -20,9 +20,6 @@
     <!--header-->
     @include("layouts.partial.top")
 
-    <!--slider-->
-    @include("layouts.partial.slide")
-
     <!--container-->
     <section>
         <div class="container">

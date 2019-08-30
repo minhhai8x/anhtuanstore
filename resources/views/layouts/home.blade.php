@@ -1,4 +1,5 @@
 @extends('layouts.master') @section('content')
+{{Auth::user()}}
 <div class="features_items">
     <!-- features_items -->
     <h2 class="title text-center">Features Items</h2>

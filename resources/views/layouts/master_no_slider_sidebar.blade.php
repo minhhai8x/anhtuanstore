@@ -20,22 +20,8 @@
     <!--header-->
     @include("layouts.partial.top")
 
-    <!--slider-->
-    @include("layouts.partial.slide")
-
     <!--container-->
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    @include("layouts.partial.sidebar")
-                </div>
-                <div class="col-sm-9 padding-right">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('layouts.main_section_container', ['id' => 'form'])
 
     @include("layouts.partial.footer")
     <!--/Footer-->
