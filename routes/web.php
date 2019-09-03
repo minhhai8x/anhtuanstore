@@ -34,9 +34,9 @@ Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginCont
 Route::post('admincp/login', ['as' => 'postLogin', 'uses' => 'Admin\AdminLoginController@postLogin']);
 Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginController@getLogout']);
 Route::group(['middleware' => 'CheckAdminLogin', 'prefix' => 'admincp', 'namespace' => 'Admin'], function() {
-    Route::get('/', function() {
-        return view('admin.home');
-    });
+    Route::get('/', ['as' => 'dashboard', 'uses' => 'AdminHomeController@index']);
+    Route::resource('category', 'AdminCategoryController');
+    Route::resource('product', 'AdminProductController');
 });
 
 Route::get('login', ['as' => 'getUserLogin', 'uses' => 'UserLoginController@getUserLogin']);
