@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Config;
 use App\Model\ProductImage;
 use App\Model\Product;
 
@@ -68,9 +69,28 @@ class AdminProductController extends Controller
             $product->meta_title = Input::get('meta_title');
             $product->meta_keywords = Input::get('meta_keywords');
             $product->meta_description = Input::get('meta_description');
-            $product->save();
-            Session::flash('message', "Successfully created product");
-            return Redirect::to('admincp/product');
+
+            if ($product->save()) {
+                if ($request->hasFile('productImage')) {
+                    $imageFile = $request->file('productImage');
+                    $destinationPath = base_path() . '/public/' . Config::get('constants.path.upload_image_path');
+
+                    if ($imageFile->isValid()) {
+                        $destinationFileName = time() . '_' . $imageFile->getClientOriginalName();
+                        $imageFile->move($destinationPath, $destinationFileName);
+                        $productImage = new ProductImage;
+                        $productImage->image_path = $destinationFileName;
+                        $productImage->title = $imageFile->getClientOriginalName();
+                        $productImage->alt = $imageFile->getClientOriginalName();
+                        $productImage->product_id = $product->id;
+                        $productImage->save();
+                    }
+                }
+                Session::flash('message', "Successfully created product");
+                return Redirect::to('admincp/product');
+            } else {
+                return Redirect::to('admincp/product/create');
+            }
         }
     }
 
@@ -99,6 +119,7 @@ class AdminProductController extends Controller
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();
         $this->data['listCate'] = $listCate;
+        $this->data['product_image_path'] = Config::get('constants.path.upload_image_path');
         return view('admin.product.edit', $this->data);
     }
 
@@ -128,9 +149,26 @@ class AdminProductController extends Controller
             $product->meta_title = Input::get('meta_title');
             $product->meta_keywords = Input::get('meta_keywords');
             $product->meta_description = Input::get('meta_description');
-            $product->save();
-            Session::flash('message', "Successfully edited product");
-            return Redirect::to('admincp/product');
+
+            if ($product->save()) {
+                if ($request->hasFile('productImage')) {
+                    $imageFile = $request->file('productImage');
+                    $destinationPath = base_path() . '/public/' . Config::get('constants.path.upload_image_path');
+
+                    if ($imageFile->isValid()) {
+                        $destinationFileName = time() . '_' . $imageFile->getClientOriginalName();
+                        $imageFile->move($destinationPath, $destinationFileName);
+                        $product->image->image_path = $destinationFileName;
+                        $product->image->title = $imageFile->getClientOriginalName();
+                        $product->image->alt = $imageFile->getClientOriginalName();
+                        $product->image->save();
+                    }
+                }
+                Session::flash('message', "Successfully edited product");
+                return Redirect::to('admincp/product');
+            } else {
+                return Redirect::to('admincp/product/create');
+            }
         }
     }
 
@@ -143,7 +181,9 @@ class AdminProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $product->delete();
+        if ($product->delete()) {
+            $product->image()->delete();
+        }
         Session::flash('message', "Successfully delete product");
         return Redirect::to('admincp/product');
     }

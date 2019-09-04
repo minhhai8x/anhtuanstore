@@ -23,7 +23,7 @@
     @if (Session::has('message'))
     <div class="alert alert-info"> {{ Session::get('message') }}</div>
     @endif
-    <input type="text" id="myInput" onkeyup="searchByColumnNo('1')" placeholder="Search for names.." class="form-control">
+    <input type="text" id="myInput" placeholder="Search for names.." class="form-control">
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
@@ -34,6 +34,7 @@
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">ID</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Thumbnail</th>
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Slug</th>
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Price</th>
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Actions</th>
@@ -96,7 +97,9 @@
     </div>
 </div>
 
-@endsection @section('page-js-script')
+@endsection
+
+@section('page-js-script')
 <script type="text/javascript">
     $(document).ready(function() {
         $('.btnDelete').click(function() {

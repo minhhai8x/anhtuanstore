@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    <form action="{{ url('admincp/product') }}" method="POST">
+    <form action="{{ url('admincp/product') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }} @if(count($errors) > 0)
         <ul>
             @foreach($errors->all() as $error)
@@ -46,6 +46,17 @@
                         <option value="{{ $cate->id }}">{{ $cate->name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Thumbnail</label>
+                    <img id="preview_image" src="{{ asset('images/no_image.png') }}"/>
+                    <input type="file" id="product_image" name="productImage" />
+                </div>
+                <div class="form-group col-md-12">
+                    <div id="btn_change_file" class="btn btn-primary">
+                        <i class="fa fa-edit"></i>
+                        <span>Change</span>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <fieldset>

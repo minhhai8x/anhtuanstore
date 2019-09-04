@@ -47,6 +47,17 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-md-3">
+                    <label>Thumbnail</label>
+                    <img id="preview_image" src="/{{ $product_image_path }}/{{ $product->image->image_path }}"/>
+                    <input type="file" id="product_image" name="productImage" />
+                </div>
+                <div class="form-group col-md-12">
+                    <div id="btn_change_file" class="btn btn-primary">
+                        <i class="fa fa-edit"></i>
+                        <span>Change</span>
+                    </div>
+                </div>
                 <div class="form-group col-md-12">
                     <fieldset>
                         <legend>SEO:</legend>

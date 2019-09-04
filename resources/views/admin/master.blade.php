@@ -19,6 +19,9 @@
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('admin/css/skin-blue.min.css') }}">
 
+    <!-- Customize CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,11 +69,12 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('admin/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('admin/js/demo.js') }}"></script>
+    <script src="{{ asset('admin/js/custom.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.sidebar-menu').tree()
         })
     </script>
+    @yield('page-js-script')
 </body>
 </html>
