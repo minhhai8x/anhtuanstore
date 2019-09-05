@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    <form action="{{ url('admincp/product') }}/{{ $product->id }}" method="POST">
+    <form action="{{ url('admincp/product') }}/{{ $product->id }}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="PUT"> {{ csrf_field() }} @if(count($errors) > 0)
         <ul>
             @foreach($errors->all() as $error)

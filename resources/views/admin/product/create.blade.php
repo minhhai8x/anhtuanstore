@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label>Desc</label>
-                    <textarea name="txtDesc" class="form-control">{{ old('txtDesc') }}</textarea>
+                    <textarea id="txtDesc" name="txtDesc" class="form-control">{{ old('txtDesc') }}</textarea>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Category</label>
@@ -78,4 +78,13 @@
         </div>
     </form>
 </section>
+@endsection
+
+@section('page-js-script')
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+      $(function () {
+        CKEDITOR.replace('txtDesc');
+      })
+    </script>
 @endsection

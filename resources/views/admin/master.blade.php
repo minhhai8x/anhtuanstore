@@ -72,7 +72,7 @@
     <script src="{{ asset('admin/js/custom.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.sidebar-menu').tree()
+            $('.sidebar-menu').tree();
         })
     </script>
     @yield('page-js-script')

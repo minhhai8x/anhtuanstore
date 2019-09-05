@@ -94,7 +94,9 @@
     </div>
 </div>
 
-@endsection @section('page-js-script')
+@endsection
+
+@section('page-js-script')
 <script type="text/javascript">
     $(document).ready(function() {
         $('.btnDelete').click(function() {
