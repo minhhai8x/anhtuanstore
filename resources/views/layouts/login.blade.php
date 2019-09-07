@@ -1,4 +1,4 @@
-@extends('layouts.master_no_slider_sidebar')
+@extends('layouts.master_no_slider_sidebar', ['id' => 'form'])
 
 @section('content')
     <div class="col-sm-4 col-sm-offset-1">

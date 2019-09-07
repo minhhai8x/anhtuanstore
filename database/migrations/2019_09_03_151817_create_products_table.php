@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('desc');
             $table->string('slug');
-            $table->string('price');
+            $table->float('price', 8, 2);
             $table->string('meta_title');
             $table->string('meta_keywords');
             $table->string('meta_description');

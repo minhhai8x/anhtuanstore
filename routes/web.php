@@ -12,22 +12,40 @@
 */
 
 Auth::routes();
-Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('/', function () {
-    return view('layouts.home');
+    return redirect()->action(
+        'HomeController@index', ['locale' => app()->getLocale()]
+    );
 });
 
-Route::get('/product', function () {
-    return view('layouts.product');
+Route::get('/home', function () {
+    return redirect()->action(
+        'HomeController@index', ['locale' => app()->getLocale()]
+    );
 });
 
-Route::get('/news', function () {
-    return view('layouts.news');
-});
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], function() {
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-Route::get('/contact', function () {
-    return view('layouts.contact');
+    Route::get('/product', function () {
+        return view('layouts.product');
+    });
+
+    Route::get('/news', function () {
+        return view('layouts.news');
+    });
+
+    Route::get('/contact', function () {
+        return view('layouts.contact');
+    });
+
+    Route::get('/cart', ['as' => 'getCart', 'uses' => 'CartController@cart']);
+    Route::post('/cart', ['as' => 'postCart', 'uses' => 'CartController@cart']);
+
+    Route::get('/cart/up-qty', ['as' => 'getCartIncreaseQty', 'uses' => 'CartController@increaseQuantity']);
+    Route::get('/cart/down-qty', ['as' => 'getCartDecreaseQty', 'uses' => 'CartController@decreaseQuantity']);
+    Route::get('/cart/remove-item', ['as' => 'getCartRemoveItem', 'uses' => 'CartController@removeItem']);
 });
 
 Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);
@@ -42,8 +60,6 @@ Route::group(['middleware' => 'CheckAdminLogin', 'prefix' => 'admincp', 'namespa
 Route::get('login', ['as' => 'getUserLogin', 'uses' => 'UserLoginController@getUserLogin']);
 Route::post('login', ['as' => 'postUserLogin', 'uses' => 'UserLoginController@postUserLogin']);
 Route::get('logout', ['as' => 'getUserLogout', 'uses' => 'UserLoginController@getUserLogout']);
-Route::group(['middleware' => 'CheckUserLogin'], function() {
-    Route::get('/', function() {
-        return view('layouts.home');
-    });
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'CheckUserLogin'], function() {
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 });

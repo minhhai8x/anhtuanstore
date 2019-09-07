@@ -49,7 +49,11 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>Thumbnail</label>
+                    @if (isset($product->image))
                     <img id="preview_image" src="/{{ $product_image_path }}/{{ $product->image->image_path }}"/>
+                    @else
+                    <img id="preview_image" src="{{ asset('images/no_image.png') }}" />
+                    @endif
                     <input type="file" id="product_image" name="productImage" />
                 </div>
                 <div class="form-group col-md-12">
@@ -78,4 +82,13 @@
         </div>
     </form>
 </section>
+@endsection
+
+@section('page-js-script')
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+      $(function () {
+        CKEDITOR.replace('txtDesc');
+      })
+    </script>
 @endsection

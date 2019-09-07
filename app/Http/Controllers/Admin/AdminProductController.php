@@ -158,10 +158,12 @@ class AdminProductController extends Controller
                     if ($imageFile->isValid()) {
                         $destinationFileName = time() . '_' . $imageFile->getClientOriginalName();
                         $imageFile->move($destinationPath, $destinationFileName);
-                        $product->image->image_path = $destinationFileName;
-                        $product->image->title = $imageFile->getClientOriginalName();
-                        $product->image->alt = $imageFile->getClientOriginalName();
-                        $product->image->save();
+                        $productImage = isset($product->image) ? $product->image : new ProductImage;
+                        $productImage->image_path = $destinationFileName;
+                        $productImage->title = $imageFile->getClientOriginalName();
+                        $productImage->alt = $imageFile->getClientOriginalName();
+                        $productImage->product_id = $product->id;
+                        $productImage->save();
                     }
                 }
                 Session::flash('message', "Successfully edited product");

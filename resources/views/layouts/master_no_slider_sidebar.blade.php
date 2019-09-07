@@ -21,7 +21,7 @@
     @include("layouts.partial.top")
 
     <!--container-->
-    @include('layouts.main_section_container', ['id' => 'form'])
+    @include('layouts.main_section_container', ['id' => $id])
 
     @include("layouts.partial.footer")
     <!--/Footer-->
@@ -32,5 +32,7 @@
     <script src="{{ asset('layouts/js/price-range.js') }}"></script>
     <script src="{{ asset('layouts/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('layouts/js/main.js') }}"></script>
+
+    @yield('page-js-script')
 </body>
 </html>
