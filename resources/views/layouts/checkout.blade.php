@@ -6,8 +6,57 @@
 <div class="breadcrumbs">
     <ol class="breadcrumb">
         <li><a href="{{ route('home', app()->getLocale()) }}">Home</a></li>
-        <li class="active">Shopping Cart</li>
+        <li class="active">Check out</li>
     </ol>
+</div>
+<!--/breadcrums-->
+<form action="{{ route('postCheckOut', app()->getLocale()) }}" method="POST">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="shopper-informations">
+        <div class="row">
+            <div class="col-sm-5 clearfix">
+                <div class="bill-to">
+                    <p>Customer informations</p>
+                    @if(count($errors) >0)
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li class="text-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <div class="form-one">
+                        <input class="custom-input-form" name="customerName" type="text" placeholder="Customer Name*">
+                        <input class="custom-input-form" name="customerEmail" type="text" placeholder="Email*">
+                        <input class="custom-input-form" name="customerAddress" type="text" placeholder="Address*">
+                    </div>
+                    <div class="form-two">
+                        <input class="custom-input-form" name="customerPhone" type="text" placeholder="Phone *">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="order-message">
+                    <p>Note</p>
+                    <textarea name="customerNote" placeholder="Notes about your order, Special Notes for Delivery" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shopper-informations">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="shopper-info">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <a class="btn btn-primary" href="{{ route('home', app()->getLocale()) }}"> < Back to Home</a>
+                    <button type="submit" class="btn btn-primary">Proceed to purchase > </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+    </div>
+</form>
+<div class="review-payment">
+    <h2>Review & Payment</h2>
 </div>
 @if (isset($cart) && count($cart) > 0)
 <div class="table-responsive cart_info">
@@ -33,7 +82,7 @@
                     @endif
                 </td>
                 <td class="cart_description">
-                    <h4><a href="#product-detail">{{ $item->name }}</a></h4>
+                    <h4><a href="">{{ $item->name }}</a></h4>
                 </td>
                 <td class="cart_price">
                     <p>{{ number_format($item->price) }} {{ $currency }}</p>
@@ -53,6 +102,26 @@
                 </td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="4">&nbsp;</td>
+                <td colspan="2">
+                    <table class="table table-condensed total-result">
+                        <tr>
+                            <td>Tax(5%)</td>
+                            <td id="cart-tax">{{ number_format($item->tax) }} {{ $currency }}</td>
+                        </tr>
+                        <tr class="shipping-cost">
+                            <td>Shipping Cost</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td><span id="cart-total">{{ $total }} {{ $currency }}</span></td>
+                        </tr>
+                        <input type="hidden" name="hid_currency" id="hid_currency" value="{{ $currency }}">
+                    </table>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -78,6 +147,8 @@
                 success: function(response) {
                     parent.find('.cart_quantity_input').val(response['qty']);
                     parent.find('.cart_total_price').html(response['subtotal']);
+                    $('#cart-tax').html(response['tax'] + ' ' + $('#hid_currency').val());
+                    $('#cart-total').html(response['total'] + ' ' + $('#hid_currency').val());
                 } 
             });
         });
@@ -94,6 +165,8 @@
                 success: function(response) {
                     parent.find('.cart_quantity_input').val(response['qty']);
                     parent.find('.cart_total_price').html(response['subtotal']);
+                    $('#cart-tax').html(response['tax'] + ' ' + $('#hid_currency').val());
+                    $('#cart-total').html(response['total'] + ' ' + $('#hid_currency').val());
                 } 
             });
         });

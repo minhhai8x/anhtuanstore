@@ -1630,6 +1630,10 @@ h2.title {
   margin: 15px -70px 10px 25px;
 }
 
+.cart-product-thumb {
+  max-width: 110px;
+}
+
 .cart_quantity_button a {
   background:#F0F0E9;
   color: #696763;
@@ -1914,6 +1918,15 @@ h2.title {
   font-weight: 300
 }
 
+.custom-input-form {
+  background:#F0F0E9;
+  border: 0 none;
+  margin-bottom:10px;
+  padding: 10px;
+  width: 100%;
+  font-weight: 300
+}
+
 .form-two > form > select {
   padding:10px 5px
 }
@@ -1925,7 +1938,7 @@ h2.title {
 
 .order-message textarea {
   font-size: 12px;
-  height: 335px;
+  height: auto;
   margin-bottom: 20px;
   padding: 15px 20px;
 }

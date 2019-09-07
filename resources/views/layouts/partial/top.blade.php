@@ -39,11 +39,16 @@
                     <div class="btn-group pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                                @if (App::isLocale('en'))
                                 USA
+                                @else
+                                VN
+                                @endif
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('home', ['locale' => 'vi']) }}">Vietnam</a></li>
+                                <li><a href="{{ route('home', ['locale' => 'en']) }}">USA</a></li>
+                                <li><a href="{{ route('home', ['locale' => 'vi']) }}">VN</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,8 +59,7 @@
                             @if (Auth::check())
                             <li><a href="#"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li>
                             @endif
-                            <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                            <li><a href="{{ route('getCheckOut', app()->getLocale()) }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{ route('getCart', app()->getLocale()) }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             @if (Auth::check())
                             <li><a href="{{ route('getUserLogout') }}"><i class="fa fa-unlock"></i> Logout</a></li>
