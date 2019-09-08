@@ -25,7 +25,7 @@
                 <div class="product-overlay">
                     <div class="overlay-content">
                         <h2>{{ $product->price }}</h2>
-                        <p><a href="#detail">{{ $product->name }}</a></p>
+                        <p><a href="{{ route('getProductDetail', ['locale' => app()->getLocale(), 'pid' => $product->id]) }}">{{ $product->name }}</a></p>
                         <form method="POST" action="{{ route('postCart', app()->getLocale()) }}">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

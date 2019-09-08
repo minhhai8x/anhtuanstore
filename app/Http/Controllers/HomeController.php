@@ -28,6 +28,7 @@ class HomeController extends Controller
         $listProduct = DB::table('products')
             ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
             ->orderBy('products.created_at', 'desc')
+            ->select('products.id', 'products.name', 'products.price', 'product_images.image_path')
             ->paginate(Config::get('constants.records_per_page.new_products'));
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();

@@ -6,6 +6,7 @@ return [
         'home' => 'Home page',
         'cart' => 'Your cart',
         'category' => 'Categories',
+        'products' => 'Product list',
         'checkout' => 'Check out',
         'checkout_success' => 'Check out success',
     ],

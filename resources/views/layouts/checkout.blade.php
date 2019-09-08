@@ -76,13 +76,13 @@
             <tr>
                 <td class="cart_product">
                     @if (isset($item->options))
-                    <a href="#product-detail"><img class="cart-product-thumb" src="/{{ $item->options->image }}" alt="{{ $item->name }}"></a>
+                    <a href="{{ route('getProductDetail', ['locale' => app()->getLocale(), 'pid' => $item->id]) }}"><img class="cart-product-thumb" src="/{{ $item->options->image }}" alt="{{ $item->name }}"></a>
                     @else
-                    <a href="#product-detail"><img src="{{ asset('images/no_image.png') }}" alt="{{ $item->name }}" /></a>
+                    <a href="{{ route('getProductDetail', ['locale' => app()->getLocale(), 'pid' => $item->id]) }}"><img src="{{ asset('images/no_image.png') }}" alt="{{ $item->name }}" /></a>
                     @endif
                 </td>
                 <td class="cart_description">
-                    <h4><a href="">{{ $item->name }}</a></h4>
+                    <h4><a href="{{ route('getProductDetail', ['locale' => app()->getLocale(), 'pid' => $item->id]) }}">{{ $item->name }}</a></h4>
                 </td>
                 <td class="cart_price">
                     <p>{{ number_format($item->price) }} {{ $currency }}</p>

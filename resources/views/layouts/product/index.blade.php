@@ -6,7 +6,7 @@
 
 <div class="features_items">
     <!-- features_items -->
-    <h2 class="title text-center">{{ __('main.title.category') }}</h2>
+    <h2 class="title text-center">{{ __('main.title.products') }}</h2>
 
     @if (isset($listProduct) && count($listProduct) > 0) @foreach($listProduct as $product)
     <div class="col-sm-4">
