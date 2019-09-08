@@ -42,6 +42,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'm
     Route::get('/checkout', ['as' => 'getCheckOut', 'uses' => 'CartController@getCheckOut']);
     Route::post('/checkout', ['as' => 'postCheckOut', 'uses' => 'CartController@postCheckOut']);
     Route::get('/checkout-success', ['as' => 'getCheckOutSuccess', 'uses' => 'CartController@getCheckOutSuccess']);
+
+    Route::get('/category/{cid}', ['as' => 'categories', 'uses' => 'CategoryController@index']);
 });
 
 Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);

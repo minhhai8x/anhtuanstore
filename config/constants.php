@@ -9,5 +9,6 @@ return [
     ],
     'records_per_page' => [
         'new_products' => 12,
+        'products_in_category' => 24,
     ],
 ];

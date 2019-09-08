@@ -5,6 +5,7 @@ return [
         'new_products' => 'Sản Phẩm Mới',
         'home' => 'Trang chủ',
         'cart' => 'Giỏ hàng của bạn',
+        'category' => 'Sản phẩm theo danh mục',
         'checkout' => 'Kiểm tra đơn hàng',
         'checkout_success' => 'Đặt hàng thành công',
     ],
