@@ -12,7 +12,7 @@ class UserLoginController extends Controller
     {
         if (Auth::check()) {
             // if login successful, redirect to Home page
-            return redirect('home');
+            return redirect(app()->getLocale());
         } else {
             return view('layouts.login');
         }
@@ -36,7 +36,7 @@ class UserLoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            return redirect('home');
+            return redirect(app()->getLocale());
         } else {
             return redirect()->back()->with('status', 'Email or Password is incorrect.');
         }

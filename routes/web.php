@@ -14,12 +14,8 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect()->action('HomeController@index');
-})->middleware('setlocale');
-
-Route::get('/home', function () {
-    return redirect()->action('HomeController@index');
-})->middleware('setlocale');
+    return redirect(app()->getLocale());
+});
 
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
@@ -61,6 +57,6 @@ Route::group(['middleware' => 'CheckAdminLogin', 'prefix' => 'admincp', 'namespa
 Route::get('login', ['as' => 'getUserLogin', 'uses' => 'UserLoginController@getUserLogin']);
 Route::post('login', ['as' => 'postUserLogin', 'uses' => 'UserLoginController@postUserLogin']);
 Route::get('logout', ['as' => 'getUserLogout', 'uses' => 'UserLoginController@getUserLogout']);
-Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'CheckUserLogin'], function() {
-    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index'])->middleware('setlocale');
+Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => ['CheckUserLogin', 'setlocale']], function() {
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 });
