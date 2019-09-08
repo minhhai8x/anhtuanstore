@@ -29,6 +29,7 @@ class CategoryController extends Controller
             ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
             ->where('products.category_id', $cid)
             ->orderBy('products.created_at', 'desc')
+            ->select('products.id', 'products.name', 'products.price', 'product_images.image_path')
             ->paginate(Config::get('constants.records_per_page.products_in_category'));
         $listCate = DB::table('categories')
             ->orderBy('id','desc')->get();

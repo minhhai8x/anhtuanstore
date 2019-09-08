@@ -6,6 +6,7 @@ return [
         'home' => 'Trang chủ',
         'cart' => 'Giỏ hàng của bạn',
         'category' => 'Sản phẩm theo danh mục',
+        'products' => 'Danh sách sản phẩm',
         'checkout' => 'Kiểm tra đơn hàng',
         'checkout_success' => 'Đặt hàng thành công',
     ],

@@ -92,7 +92,7 @@
                             <li><a href="{{ route('home', app()->getLocale()) }}" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
+                                    <li><a href="{{ route('getProductList', app()->getLocale()) }}">Products</a></li>
                                     <li><a href="{{ route('getCart', app()->getLocale()) }}">Cart</a></li>
                                     <li><a href="{{ route('getUserLogin') }}">Login</a></li>
                                 </ul>

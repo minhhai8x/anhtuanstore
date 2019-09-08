@@ -20,9 +20,8 @@ Route::get('/', function () {
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-    Route::get('/product', function () {
-        return view('layouts.product');
-    });
+    Route::get('/products', ['as' => 'getProductList', 'uses' => 'ProductController@index']);
+    Route::get('/product/{pid}', ['as' => 'getProductDetail', 'uses' => 'ProductController@show']);
 
     Route::get('/news', function () {
         return view('layouts.news');
